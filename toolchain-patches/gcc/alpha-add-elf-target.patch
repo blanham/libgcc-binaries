@@ -1,0 +1,32 @@
+diff --git a/gcc/config.gcc b/gcc/config.gcc
+index 648b3dc21..f9d3bb967 100644
+--- a/gcc/config.gcc
++++ b/gcc/config.gcc
+@@ -1209,6 +1209,13 @@ aarch64*-wrs-vxworks*)
+         tm_file="${tm_file} vx-common.h vxworks.h aarch64/aarch64-vxworks.h"
+         tmake_file="${tmake_file} aarch64/t-aarch64 aarch64/t-aarch64-vxworks"
+         ;;
++alpha*-*-elf*)
++	tm_file="elfos.h ${tm_file} alpha/elf.h newlib-stdint.h"
++	tmake_file="${tmake_file} alpha/t-alpha"
++	gas=yes
++	gnu_ld=yes
++	extra_options="${extra_options} alpha/elf.opt"
++	;;
+ alpha*-*-linux*)
+ 	tm_file="elfos.h ${tm_file} alpha/elf.h alpha/linux.h alpha/linux-elf.h glibc-stdint.h"
+ 	tmake_file="${tmake_file} alpha/t-linux alpha/t-alpha"
+diff --git a/libgcc/config.host b/libgcc/config.host
+index 9d7212028..4bd3bb4c8 100644
+--- a/libgcc/config.host
++++ b/libgcc/config.host
+@@ -432,6 +432,9 @@ aarch64*-*-vxworks7*)
+ 	tmake_file="${tmake_file} ${cpu_type}/t-softfp t-softfp t-crtfm"
+ 	tmake_file="${tmake_file} t-dfprules"
+ 	;;
++alpha*-*-elf*)
++	tmake_file="${tmake_file} alpha/t-alpha alpha/t-ieee"
++	;;
+ alpha*-*-linux*)
+ 	tmake_file="${tmake_file} alpha/t-alpha alpha/t-ieee t-crtfm alpha/t-linux"
+ 	extra_parts="$extra_parts crtfastmath.o"

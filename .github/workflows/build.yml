@@ -9,7 +9,7 @@ jobs:
   libgcc:
     strategy:
       matrix:
-        target_arch: [i386, i686, x86_64, arm, aarch64, loongarch64, loongarch64-softfloat, riscv64, riscv64-softfloat, m68k]
+        target_arch: [i386, i686, x86_64, alpha, arm, aarch64, loongarch64, loongarch64-softfloat, m68k, mips, mipsel, mips64, mips64el, pwoerpc, powerpc64, powerpc64le, riscv64, riscv64-softfloat, s390x, sh, sparc, sparc64, vax]
 
     name: Build and upload libgcc for ${{matrix.target_arch}}
     runs-on: ubuntu-latest
@@ -33,8 +33,18 @@ jobs:
               echo "arm-none-eabi" >target-triplet ;; \
             loongarch64-softfloat) \
               echo "loongarch64-elf" >target-triplet ;; \
+            mipsel) \
+              echo "mipsel-unknown-linux-gnu" >target-triplet ;; \
+            mips64*) \
+              echo "${{matrix.target_arch}}-unknown-linux-gnuabi64" >target-triplet ;; \
+            powerpc*) \
+              echo "${{matrix.target_arch}}-unknown-linux-gnu" >target-triplet ;; \
             riscv64-softfloat) \
               echo "riscv64-elf" >target-triplet ;; \
+            s390x) \
+              echo "s390x-unknown-linux-gnu" >target-triplet ;; \
+            vax) \
+              echo "vax-unknown-linux-gnu" >target-triplet ;; \
             *) \
               echo "${{matrix.target_arch}}-elf" >target-triplet ;; \
           esac
@@ -71,9 +81,9 @@ jobs:
       - name: Push new binaries
         run: |
           set -ex
-          git config user.name 'mintsuki'
-          git config user.email 'mintsuki@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/osdev0/libgcc-binaries.git
+          git config user.name 'blanham'
+          git config user.email 'blanham@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/blanham/libgcc-binaries.git
           while true; do \
             git pull --all; \
             git add .; \
