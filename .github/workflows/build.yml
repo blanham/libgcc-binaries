@@ -33,10 +33,8 @@ jobs:
               echo "arm-none-eabi" >target-triplet ;; \
             loongarch64-softfloat) \
               echo "loongarch64-elf" >target-triplet ;; \
-            mipsel) \
-              echo "mipsel-unknown-linux-gnu" >target-triplet ;; \
-            mips64*) \
-              echo "${{matrix.target_arch}}-unknown-linux-gnuabi64" >target-triplet ;; \
+            mips*) \
+              echo "${{matrix.target_arch}}-linux-gnu" >target-triplet ;; \
             powerpc*) \
               echo "${{matrix.target_arch}}-unknown-linux-gnu" >target-triplet ;; \
             riscv64-softfloat) \
