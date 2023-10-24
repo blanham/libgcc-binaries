@@ -1,0 +1,32 @@
+diff --git a/bfd/config.bfd b/bfd/config.bfd
+index 3f08590f634..28b975af829 100644
+--- a/bfd/config.bfd
++++ b/bfd/config.bfd
+@@ -1257,6 +1257,11 @@ case "${targ}" in
+     want64=true
+     ;;
+ #ifdef BFD64
++  s390x-*-elf)
++    targ_defvec=s390_elf64_vec
++    targ_selvecs=s390_elf32_vec
++    want64=true
++    ;;
+   s390x-*-linux*)
+     targ_defvec=s390_elf64_vec
+     targ_selvecs=s390_elf32_vec
+diff --git a/ld/configure.tgt b/ld/configure.tgt
+index 8baea868477..c49b1bfb53e 100644
+--- a/ld/configure.tgt
++++ b/ld/configure.tgt
+@@ -851,6 +851,11 @@ rx-*-*)			targ_emul=elf32rx
+ s12z-*-*)		targ_emul=m9s12zelf
+ 			targ_extra_ofiles=ldelfgen.o
+ 			;;
++s390x-*-elf)		targ_emul=elf64_s390
++			targ_extra_emuls=elf_s390
++			targ_extra_libpath=$targ_extra_emuls
++			tdir_elf_s390=`echo ${targ_alias} | sed -e 's/s390x/s390/'`
++			;;
+ s390x-*-linux*)		targ_emul=elf64_s390
+ 			targ_extra_emuls=elf_s390
+ 			targ_extra_libpath=$targ_extra_emuls
