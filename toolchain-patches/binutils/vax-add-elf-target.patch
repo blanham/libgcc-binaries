@@ -1,0 +1,41 @@
+diff --git a/bfd/config.bfd b/bfd/config.bfd
+index bdee53957c0..3f08590f634 100644
+--- a/bfd/config.bfd
++++ b/bfd/config.bfd
+@@ -1417,6 +1417,10 @@ case "${targ}" in
+     targ_underscore=yes
+     ;;
+ 
++  vax-*-elf)
++    targ_defvec=vax_elf32_vec
++    ;;
++
+   vax-*-netbsdaout*)
+     targ_defvec=vax_aout_nbsd_vec
+     targ_selvecs="vax_elf32_vec vax_aout_1knbsd_vec"
+diff --git a/gas/configure.tgt b/gas/configure.tgt
+index b084e571163..f61ac2c4f6d 100644
+--- a/gas/configure.tgt
++++ b/gas/configure.tgt
+@@ -417,6 +417,8 @@ case ${generic_target} in
+ 
+   v850*-*-*)				fmt=elf ;;
+ 
++  vax-*-*)			      fmt=elf ;;
++  vax-*-netbsd*)			fmt=elf em=nbsd ;;
+   vax-*-netbsdaout)			fmt=aout em=nbsd ;;
+   vax-*-netbsd*)			fmt=elf em=nbsd ;;
+   vax-*-linux-*)			fmt=elf em=linux ;;
+diff --git a/ld/configure.tgt b/ld/configure.tgt
+index bc4780a8b34..8baea868477 100644
+--- a/ld/configure.tgt
++++ b/ld/configure.tgt
+@@ -983,6 +983,8 @@ tilepro-*-*)		targ_emul=elf32tilepro
+ v850*-*-*)		targ_emul=v850_rh850
+ 			targ_extra_emuls=v850
+ 			;;
++vax-*-*)			targ_emul=elf32vax
++			;;
+ vax-*-netbsdaout*)	targ_emul=vaxnbsd
+ 			targ_extra_emuls=elf32vax
+ 			;;

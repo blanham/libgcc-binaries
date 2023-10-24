@@ -1,0 +1,28 @@
+diff --git a/gcc/config.gcc b/gcc/config.gcc
+index f9d3bb967..a3dcc4a67 100644
+--- a/gcc/config.gcc
++++ b/gcc/config.gcc
+@@ -3494,6 +3494,10 @@ v850*-*-*)
+ 	cxx_target_objs="v850-c.o"
+ 	use_gcc_stdint=wrap
+ 	;;
++vax-*-elf*)
++	tm_file="${tm_file} elfos.h vax/elf.h newlib-stdint.h"
++	extra_options="${extra_options} vax/elf.opt"
++	;;
+ vax-*-linux*)
+ 	tm_file="${tm_file} elfos.h gnu-user.h linux.h vax/elf.h vax/linux.h"
+ 	extra_options="${extra_options} vax/elf.opt"
+diff --git a/libgcc/config.host b/libgcc/config.host
+index 4bd3bb4c8..fce2c715e 100644
+--- a/libgcc/config.host
++++ b/libgcc/config.host
+@@ -1489,6 +1489,8 @@ tic6x-*-elf)
+ v850*-*-*)
+ 	tmake_file="${tmake_file} v850/t-v850 t-fdpbit"
+ 	;;
++vax-*-elf)
++	;;
+ vax-*-linux*)
+ 	tmake_file="$tmake_file vax/t-linux"
+ 	;;
