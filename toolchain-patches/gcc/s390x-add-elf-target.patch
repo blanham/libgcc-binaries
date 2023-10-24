@@ -1,14 +1,15 @@
 diff --git a/gcc/config.gcc b/gcc/config.gcc
-index a3dcc4a67..1ce13ae7f 100644
+index a3dcc4a67..2209b63dd 100644
 --- a/gcc/config.gcc
 +++ b/gcc/config.gcc
-@@ -3163,6 +3163,16 @@ s390-*-linux*)
+@@ -3163,6 +3163,17 @@ s390-*-linux*)
  	fi
  	tmake_file="${tmake_file} s390/t-s390"
  	;;
 +s390x-*-elf*)
-+	tm_file="s390/s390x.h s390/s390.h elfos.h gnu-user.h linux.h glibc-stdint.h s390/linux.h"
-+	tm_p_file="linux-protos.h s390/s390-protos.h"
++	tm_file="s390/s390x.h s390/s390.h elfos.h gnu-user.h newlib-stdint.h"
++	tm_p_file="s390/s390-protos.h"
++	use_gcc_stdint=provide
 +	c_target_objs="${c_target_objs} s390-c.o"
 +	cxx_target_objs="${cxx_target_objs} s390-c.o"
 +	md_file=s390/s390.md

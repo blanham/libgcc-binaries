@@ -39,8 +39,6 @@ jobs:
               echo "${{matrix.target_arch}}-unknown-linux-gnu" >target-triplet ;; \
             riscv64-softfloat) \
               echo "riscv64-elf" >target-triplet ;; \
-            s390x) \
-              echo "s390x-linux-gnu" >target-triplet ;; \
             *) \
               echo "${{matrix.target_arch}}-elf" >target-triplet ;; \
           esac
