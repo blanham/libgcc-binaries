@@ -31,6 +31,8 @@ jobs:
           case "${{matrix.target_arch}}" in \
             arm) \
               echo "arm-none-eabi" >target-triplet ;; \
+            hppa*) \
+              echo "${{matrix.target_arch}}-unknown-linux-gnu" >target-triplet ;; \
             loongarch64-softfloat) \
               echo "loongarch64-elf" >target-triplet ;; \
             powerpc*) \
@@ -51,6 +53,8 @@ jobs:
               CFLAGS_FOR_TARGET="-march=rv64imac_zicsr_zifencei -mabi=lp64";; \
           esac; \
           case "${{matrix.target_arch}}" in \
+            hppa*) \
+              CFLAGS_FOR_TARGET="$CFLAGS_FOR_TARGET --without-headers --disable-libssp --disable-libquadmath --disable-libmudflap --disable-libgomp --disable-threads --disable-shared --disable-libatomic";;\
             mips*) \
               CFLAGS_FOR_TARGET="";; \
             riscv64*) \
