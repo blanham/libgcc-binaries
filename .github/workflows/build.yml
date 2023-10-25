@@ -9,7 +9,7 @@ jobs:
   libgcc:
     strategy:
       matrix:
-        target_arch: [i386, i686, x86_64, alpha, arm, aarch64, loongarch64, loongarch64-softfloat, m68k, mips, mips64, pwoerpc, powerpc64, powerpc64le, riscv64, riscv64-softfloat, s390x, sh, sparc, sparc64, vax]
+        target_arch: [i386, i686, x86_64, alpha, arm, aarch64, hppa, hppa64, loongarch64, loongarch64-softfloat, m68k, mips, mips64, powerpc, powerpc64, riscv64, riscv64-softfloat, s390x, sh, sparc, sparc64, vax]
 
     name: Build and upload libgcc for ${{matrix.target_arch}}
     runs-on: ubuntu-latest

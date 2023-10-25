@@ -1,0 +1,62 @@
+diff --git a/bfd/config.bfd b/bfd/config.bfd
+index 28b975af829..d9ff4808554 100644
+--- a/bfd/config.bfd
++++ b/bfd/config.bfd
+@@ -548,6 +548,11 @@ case "${targ}" in
+     ;;
+ 
+ #ifdef BFD64
++  hppa*64*-*-elf)
++    targ_defvec=hppa_elf64_vec
++    targ_selvecs=hppa_elf32_vec
++    want64=true
++    ;;
+   hppa*64*-*-linux-*)
+     targ_defvec=hppa_elf64_linux_vec
+     targ_selvecs=hppa_elf64_vec
+@@ -561,6 +566,9 @@ case "${targ}" in
+     ;;
+ #endif
+ 
++  hppa*-*-elf)
++    targ_defvec=hppa_elf32_vec
++    ;;
+   hppa*-*-linux-*)
+     targ_defvec=hppa_elf32_linux_vec
+     targ_selvecs=hppa_elf32_vec
+diff --git a/gas/configure.tgt b/gas/configure.tgt
+index f61ac2c4f6d..e150bed5c2e 100644
+--- a/gas/configure.tgt
++++ b/gas/configure.tgt
+@@ -207,7 +207,7 @@ case ${generic_target} in
+       hppa*64*)				fmt=elf em=hppalinux64 ;;
+       hppa*)				fmt=elf em=linux ;;
+     esac ;;
+-  hppa-*-*elf*)				fmt=elf em=hppa ;;
++  hppa*-*-*elf*)			fmt=elf em=hppa ;;
+   hppa-*-lites*)			fmt=elf em=hppa ;;
+   hppa-*-netbsd*)			fmt=elf em=nbsd ;;
+   hppa-*-openbsd*)			fmt=elf em=hppa ;;
+diff --git a/ld/configure.tgt b/ld/configure.tgt
+index c49b1bfb53e..c3b61bd9de0 100644
+--- a/ld/configure.tgt
++++ b/ld/configure.tgt
+@@ -334,13 +334,17 @@ h8300-*-linux*)
+ 			targ_emul=h8300elf_linux;
+ 			targ_extra_emuls="h8300helf_linux h8300self_linux h8300sxelf_linux"
+ 			;;
++hppa64*-*-*elf*)
++			targ_emul=elf64hppa
++			targ_extra_emuls="hppaelf"
++			;;
+ hppa*64*-*-linux-*)	targ_emul=hppa64linux
+ 			;;
+ hppa*64*-hpux*)		targ_emul=elf64hppa
+ 			;;
+ hppa*-*-linux-*)	targ_emul=hppalinux
+ 			;;
+-hppa*-*-*elf*)		targ_emul=hppaelf
++hppa-*-*elf*)		targ_emul=hppaelf
+ 			;;
+ hppa*-*-lites*)		targ_emul=hppaelf
+ 			;;
