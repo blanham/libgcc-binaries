@@ -9,7 +9,7 @@ jobs:
   libgcc:
     strategy:
       matrix:
-        target_arch: [i386, i686, x86_64, alpha, arm, aarch64, loongarch64, loongarch64-softfloat, m68k, mips, mipsel, mips64, mips64el, pwoerpc, powerpc64, powerpc64le, riscv64, riscv64-softfloat, s390x, sh, sparc, sparc64, vax]
+        target_arch: [i386, i686, x86_64, alpha, arm, aarch64, loongarch64, loongarch64-softfloat, m68k, mips, mips64, pwoerpc, powerpc64, powerpc64le, riscv64, riscv64-softfloat, s390x, sh, sparc, sparc64, vax]
 
     name: Build and upload libgcc for ${{matrix.target_arch}}
     runs-on: ubuntu-latest
@@ -33,8 +33,6 @@ jobs:
               echo "arm-none-eabi" >target-triplet ;; \
             loongarch64-softfloat) \
               echo "loongarch64-elf" >target-triplet ;; \
-            mips*) \
-              echo "${{matrix.target_arch}}-linux-gnu" >target-triplet ;; \
             powerpc*) \
               echo "${{matrix.target_arch}}-unknown-linux-gnu" >target-triplet ;; \
             riscv64-softfloat) \
@@ -45,7 +43,7 @@ jobs:
 
       - name: Build the toolchain
         run: |
-          CFLAGS_FOR_TARGET=""; \
+          CFLAGS_FOR_TARGET="-fPIC"; \
           case "${{matrix.target_arch}}" in \
             loongarch64-softfloat) \
               CFLAGS_FOR_TARGET="-mabi=lp64s";; \
@@ -53,10 +51,12 @@ jobs:
               CFLAGS_FOR_TARGET="-march=rv64imac_zicsr_zifencei -mabi=lp64";; \
           esac; \
           case "${{matrix.target_arch}}" in \
+            mips*) \
+              CFLAGS_FOR_TARGET="";; \
             riscv64*) \
               CFLAGS_FOR_TARGET="$CFLAGS_FOR_TARGET -mno-relax";; \
           esac; \
-          CFLAGS_FOR_TARGET="-O2 -pipe -fPIC -Wa,--noexecstack $CFLAGS_FOR_TARGET" TARGET="$(cat target-triplet)" GCCVERSION="$(cat gcc-version)" BINUTILSVERSION="$(cat binutils-version)" ./make_toolchain.sh
+          CFLAGS_FOR_TARGET="-O2 -pipe -Wa,--noexecstack $CFLAGS_FOR_TARGET" TARGET="$(cat target-triplet)" GCCVERSION="$(cat gcc-version)" BINUTILSVERSION="$(cat binutils-version)" ./make_toolchain.sh
 
       - name: Copy libgcc.a
         run: cp toolchain/lib/gcc/$(cat target-triplet)/$(cat gcc-version)/libgcc.a ./libgcc-${{matrix.target_arch}}.a
