@@ -54,7 +54,7 @@ jobs:
           esac; \
           case "${{matrix.target_arch}}" in \
             hppa*) \
-              CFLAGS_FOR_TARGET="$CFLAGS_FOR_TARGET --disable-threads --disable-shared";;\
+              CFLAGS_FOR_TARGET="$CFLAGS_FOR_TARGET --disable-shared";;\
             mips*) \
               CFLAGS_FOR_TARGET="";; \
             riscv64*) \
