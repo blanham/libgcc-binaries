@@ -53,8 +53,6 @@ jobs:
               CFLAGS_FOR_TARGET="-march=rv64imac_zicsr_zifencei -mabi=lp64";; \
           esac; \
           case "${{matrix.target_arch}}" in \
-            hppa*) \
-              CFLAGS_FOR_TARGET="$CFLAGS_FOR_TARGET --disable-shared";;\
             mips*) \
               CFLAGS_FOR_TARGET="";; \
             riscv64*) \
