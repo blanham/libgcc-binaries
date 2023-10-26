@@ -1,0 +1,26 @@
+diff --git a/libgcc/Makefile.in b/libgcc/Makefile.in
+index 6c4dc79ab..bd9ae84ee 100644
+--- a/libgcc/Makefile.in
++++ b/libgcc/Makefile.in
+@@ -35,7 +35,7 @@ shlib_slibdir = @slibdir@
+ SHELL = @SHELL@
+ 
+ cpu_type = @cpu_type@
+-enable_shared = @enable_shared@
++enable_shared = no
+ enable_gcov = @enable_gcov@
+ double_type_size = @double_type_size@
+ long_double_type_size = @long_double_type_size@
+diff --git a/libgcc/gthr.h b/libgcc/gthr.h
+index 1989c0c86..2845b1266 100644
+--- a/libgcc/gthr.h
++++ b/libgcc/gthr.h
+@@ -145,7 +145,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+ #define GTHREAD_USE_WEAK 1
+ #endif
+ #endif
+-#include "gthr-default.h"
++#include "gthr-single.h"
+ 
+ #ifndef HIDE_EXPORTS
+ #pragma GCC visibility pop
