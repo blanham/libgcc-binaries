@@ -7,7 +7,7 @@ index 2209b63dd..53f3d3ca4 100644
  	tm_file="${tm_file} ${cpu_type}/darwin64-biarch.h"
  	;;
 +powerpc64-*-elf*)
-+	tm_file="${tm_file} elfos.h gnu-user.h usegas.h freebsd-spec.h newlib-stdint.h rs6000/sysv4.h"
++	tm_file="${tm_file} elfos.h gnu-user.h usegas.h freebsd-spec.h newlib-stdint.h rs6000/sysv4.h rs6000/default64.h"
 +	extra_options="${extra_options} rs6000/sysv4.opt"
 +	tmake_file="rs6000/t-fprules rs6000/t-ppcgas rs6000/t-ppccomm"
 +	;;
