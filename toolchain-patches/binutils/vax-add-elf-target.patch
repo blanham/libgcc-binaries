@@ -34,7 +34,7 @@ index bc4780a8b34..8baea868477 100644
  v850*-*-*)		targ_emul=v850_rh850
  			targ_extra_emuls=v850
  			;;
-+vax-*-*)			targ_emul=elf32vax
++ vax-*-*)			targ_emul=elf32vax
 +			;;
  vax-*-netbsdaout*)	targ_emul=vaxnbsd
  			targ_extra_emuls=elf32vax
